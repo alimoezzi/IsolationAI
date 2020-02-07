@@ -1,3 +1,6 @@
+from copy import deepcopy
+
+
 class GameState:
 
     def __init__(self, n, m):
@@ -82,8 +85,15 @@ class GameState:
             (e.g., (0, 0) if the active player will move to the
             top-left corner of the board)
         """
-        # TODO: implement this function!
-        pass
+        newSate = deepcopy(self)
+        newSate._cells[move[0]][move[1]] = self._initiative
+        if self._initiative:
+            self._last_y = move
+            self._initiative = 0
+        else:
+            self._last_x = move
+            self._initiative = 1
+        return newSate
 
 
 if __name__ == "__main__":
